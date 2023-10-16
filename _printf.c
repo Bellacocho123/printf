@@ -8,7 +8,7 @@ include "main.h"
 
 int _printf(const char *format, ...)
 {
-        int n, length = 0;
+	int n, length = 0;
         va_list characters;
 
         spec_func options[] = {
