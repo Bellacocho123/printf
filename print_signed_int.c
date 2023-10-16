@@ -14,16 +14,19 @@ int print_signed_int(va_list element)
 	num = va_arg(element, int);
 
 	if (num < 0)
+	{
+		_putchar(45);
+		num = -num;
+	}
 
-		int print_signed_int(va_list element)
-		{
-			int num, i = 0, length = 0;
-	int digits[10];
+	if (num == 0)
+	{
+		_putchar(48);
+		return (1);
+	}
 
-	num = va_arg(element, int);
-
-	if (num < 0)
-		{
+	while (num > 0)
+	{
 		digits[i] = num % 10;
 		num /= 10;
 		i++;
