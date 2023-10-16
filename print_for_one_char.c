@@ -1,16 +1,80 @@
 #include "main.h"
 
-/**
- * print_for_one_char - the function should print one char
- * @element: the va_list element passed in from _printf.c
- * Return: the number of charactes in the string
- */
-int print_for_one_char(va_list element)
+```c
+#include <stdio.h>
+#include <stdarg.h>
+
+int _printf(const char *format, ...)
 {
-	char s;
+    va_list args;
+    va_start(args, format);
 
-	s = va_arg(element, int);
-	_putchar(s);
+    int count = 0; // Number of characters printed
 
-	return (1);
+    while (*format != '\0')
+    {
+        if (*format == '%')
+        {
+            format++; // Move past the '%'
+
+            // Handle the conversion specifier
+            switch (*format)
+            {
+                case 'c':
+                {
+                    // Print a single character
+                    int character = va_arg(args, int);
+                    putchar(character);
+                    count++;
+                    break;
+                }
+                case 's':
+                {
+                    // Print a string
+                    char *str = va_arg(args, char *);
+                    while (*str != '\0')
+                    {
+                        putchar(*str);
+                        str++;
+                        count++;
+                    }
+                    break;
+                }
+                case '%':
+                {
+                    // Print a literal '%'
+                    putchar('%');
+                    count++;
+                    break;
+                }
+                default:
+                    // Invalid conversion specifier, ignore it
+                    break;
+            }
+        }
+        else
+        {
+            // Print regular characters
+            putchar(*format);
+            count++;
+        }
+
+        format++;
+    }
+
+    va_end(args);
+
+    return count;
 }
+
+int main()
+{
+    _printf("Hello, %s! Today is %c.\n", "John", 'A');
+    // Output: Hello, John! Today is A.
+
+    _printf("The value of 5 is %d%%.\n", 5);
+    // Output: The value of 5 is 5%.
+
+    return 0;
+}
+```
