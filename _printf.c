@@ -1,50 +1,54 @@
 #include "main.h"
 
 /**
- * _printf - the main printf function to output
- * @format: the argument of an input
- * Return: the length of the string
+ * _printf - function to print output
+ * @format: input
+ *
+ * Description - fxn to format and print output to the
+ * standard output stream
+ *
+ * Return: 0 on success
  */
 
 int _printf(const char *format, ...)
 {
-	int a, b, n, length = 0;
+	unsigned int i = 0, i_val = 0;
 
-	spec_func options[] = {
-		{"%b", print_conv_binary}, {"%c", print_for_one_char},
-		{"%s", print_string}, {"%%", print_percent},
-		{"%d", print_signed_int}, {"%i", print_unsigned_int},
-		{"%u", print_custom_unsigned}, {"%o", print_octal},
-		{"%x", print_hex_lowercase}, {"%p", print_pointer},
-		{"%X", print_hex_uppercase}, {NULL, NULL}
-	};
-	va_list characters;
+	va_list args;
 
-	va_start(characters, format);
+	va_start(args, format);
 
-	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
-		return (-1);
-	for (a = 0; format[a]; a++)
+	for ( ; format[i] != '\0'; i++)
 	{
-		if (format[a] == '%')
+		if (format[i] != '%')
 		{
-			for (b = 0; options[b].specifier; b++)
-			{
-				if (format[a + 1] == options[b].specifier[1])
-				{
-					n = options[b].correct_function(characters);
-					length += n;
-					break;
-				}
-			}
-			a++;
+			_putchar(format[i]);
 		}
-		else
+		else if (format[i + 1] == 'c')
 		{
-			_putchar(format[a]);
-			length++;
+			_putchar(va_arg(args, int));
+			i++;
 		}
+		else if (format[i + 1] == 's')
+		{
+			int i_value = _puts(va_arg(args, char *));
+
+			i++;
+			i_val += (i_value - 1);
+		}
+		else if (format[i + 1] == '%')
+		{
+			_putchar('%');
+			i++;
+		}
+		else if ((format[i + 1] == 'd') || (format[i + 1] == 'i'))
+		{
+			_our_int(va_arg(args, int));
+			i++;
+		}
+		i_val += 1;
 	}
-	va_end(characters);
-	return (length);
+	va_end(args);
+
+	return (i_val);
 }
