@@ -9,5 +9,7 @@
 /* function prototypes */
 int _printf(const char *format, ...);
 int _puts(char *string);
+int _putchar(char z);
+int _my_puts(char *string);
 
 #endif /* MAIN */
