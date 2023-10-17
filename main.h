@@ -28,7 +28,7 @@ typedef struct {
 
 /* Function prototypes */
 int _printf(const char *format, ...);
-int _putchar(const char *fmt, int *i, va_list list, char buffer[], int flags, int width, int precision, int size);
+int handle_write_char(const char *fmt, int *i, va_list list, char buffer[], int flags, int width, int precision, int size);
 int get_flags(const char *format, int *i);
 int get_width(const char *format, int *i, va_list list);
 int get_precision(const char *format, int *i, va_list list);
@@ -62,7 +62,7 @@ int print_reverse(va_list types, char buffer[], int flags, int width, int precis
 int print_rot13string(va_list types, char buffer[], int flags, int width, int precision, int size);
 
 /* width handler */
-int _putchar(char c);
+int handle_write_char(char c);
 int write_number(int is_positive, int ind, char buffer[], int flags, int width, int precision, int size);
 int write_num(int ind, char bff[], int flags, int width, int precision, int length, char padd, char extra_c);
 int write_pointer(char buffer[], int ind, int length, int width, int flags, char padd, char extra_c, int padd_start);
