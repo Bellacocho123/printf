@@ -21,9 +21,10 @@
 #define S_SHORT 1
 
 /* Struct for format specifier */
-typedef struct {
-    char fmt;
-    int (*fn)(va_list, char[], int, int, int, int);
+typedef struct 
+{
+	char fmt;
+	int (*fn)(va_list, char[], int, int, int, int);
 } fmt_t;
 
 /* Function prototypes */

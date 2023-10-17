@@ -42,14 +42,14 @@ int _printf(const char *format, ...)
 			}
 			case '%':
 				write(1, "%", 1);
-				printed_chars++;
-				break;
+		printed_chars++;
+		break;
 		}
 	}
 	else
 	{
-		write(1, format, 1);
-		printed_chars++;
+	write(1, format, 1);
+	printed_chars++;
 	}
 	format++;
 	}
