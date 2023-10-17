@@ -9,7 +9,7 @@ int print_char(va_list types)
 {
 	char c = va_arg(types, int);
 
-	return _putchar(c);
+	return handle_write_char(c);
 
 }
 /************************* PRINT A STRING *************************/
